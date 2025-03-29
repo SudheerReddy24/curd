@@ -22,7 +22,7 @@ public class CrudController {
 
     @PostMapping("/create")
     @Operation(summary = "Add a new data",
-            description = "Provide necessary details to add a new data")
+            description = "Provide details to add a new data")
     public ResponseEntity<String> createData(@RequestBody CrudDto crudDto){
         try{
             String cd = service.addData(crudDto);
