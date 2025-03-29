@@ -2,7 +2,7 @@ package com.vislesha.curd.controller;
 
 import com.vislesha.curd.dto.CrudDto;
 import com.vislesha.curd.entity.Crud;
-import com.vislesha.curd.service.CrudServiceImpl;
+import com.vislesha.curd.service.CrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.List;
 public class CrudController {
 
     @Autowired
-    private CrudServiceImpl service;
+    private CrudService service;
 
     @PostMapping("/create")
     @Operation(summary = "Add a new data",

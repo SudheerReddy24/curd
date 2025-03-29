@@ -37,7 +37,7 @@ public class CrudServiceImpl implements CrudService {
             return "Data inserted Successfully";
         }
         catch (Exception e){
-            log.error("Error occurred while inserting data",e.getMessage());
+            log.error("Error occurred while inserting data: {}",e.getMessage());
             throw new RuntimeException("Error occurred while inserting data");
         }
     }
@@ -50,7 +50,7 @@ public class CrudServiceImpl implements CrudService {
             return curd;
         }
         catch (Exception e){
-            log.error("An error occurred while retrieving data",e.getMessage());
+            log.error("An error occurred while retrieving data: {}",e.getMessage());
             throw new RuntimeException("An error occurred while retrieving data");
         }
     }
@@ -69,7 +69,7 @@ public class CrudServiceImpl implements CrudService {
             }
         }
         catch (Exception e){
-            log.error("An error occurred while fetching data by ID: {}",id,e.getMessage());
+            log.error("An error occurred while fetching data by ID: {}{}",id,e.getMessage());
             throw new RuntimeException("An error occurred while fetching data by ID ",e);
         }
     }
@@ -89,7 +89,7 @@ public class CrudServiceImpl implements CrudService {
             }
         }
         catch (Exception e){
-            log.error("Error occurred while deleting the data",e.getMessage(),e);
+            log.error("Error occurred while deleting the data: {}",e.getMessage(),e);
             throw new RuntimeException("Error occurred while deleting the data");
         }
     }
@@ -110,7 +110,7 @@ public class CrudServiceImpl implements CrudService {
             log.info("Data updated successfully {}", crud);
             return "Data updated successfully";
         } catch (Exception e) {
-            log.error("Error occurred while updating data", e.getMessage(),e);
+            log.error("Error occurred while updating data: {}", e.getMessage(),e);
             return null;
         }
     }
