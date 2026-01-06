@@ -1,9 +1,9 @@
-package com.vislesha.curd.service;
+package com.curd.app.service;
 
-import com.vislesha.curd.CrudApplication;
-import com.vislesha.curd.dto.CrudDto;
-import com.vislesha.curd.entity.Crud;
-import com.vislesha.curd.repository.CrudRepository;
+import com.curd.app.CrudApplication;
+import com.curd.app.dto.CrudDto;
+import com.curd.app.entity.Crud;
+import com.curd.app.repository.CrudRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

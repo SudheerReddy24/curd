@@ -1,8 +1,8 @@
-package com.vislesha.curd.controller;
+package com.curd.app.controller;
 
-import com.vislesha.curd.dto.CrudDto;
-import com.vislesha.curd.entity.Crud;
-import com.vislesha.curd.service.CrudService;
+import com.curd.app.dto.CrudDto;
+import com.curd.app.entity.Crud;
+import com.curd.app.service.CrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

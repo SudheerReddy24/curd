@@ -1,11 +1,9 @@
-package com.vislesha.curd.service;
+package com.curd.app.service;
 
-import com.vislesha.curd.dto.CrudDto;
-import com.vislesha.curd.entity.Crud;
-import com.vislesha.curd.repository.CrudRepository;
+import com.curd.app.dto.CrudDto;
+import com.curd.app.entity.Crud;
+import com.curd.app.repository.CrudRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.vislesha.curd.dto;
+package com.curd.app.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

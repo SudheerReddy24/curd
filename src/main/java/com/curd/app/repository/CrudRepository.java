@@ -1,6 +1,6 @@
-package com.vislesha.curd.repository;
+package com.curd.app.repository;
 
-import com.vislesha.curd.entity.Crud;
+import com.curd.app.entity.Crud;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

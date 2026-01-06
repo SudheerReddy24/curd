@@ -1,7 +1,7 @@
-package com.vislesha.curd.service;
+package com.curd.app.service;
 
-import com.vislesha.curd.dto.CrudDto;
-import com.vislesha.curd.entity.Crud;
+import com.curd.app.dto.CrudDto;
+import com.curd.app.entity.Crud;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package com.vislesha.curd.controller;
+package com.curd.app.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.vislesha.curd.dto.CrudDto;
-import com.vislesha.curd.entity.Crud;
-import com.vislesha.curd.service.CrudServiceImpl;
+import com.curd.app.dto.CrudDto;
+import com.curd.app.entity.Crud;
+import com.curd.app.service.CrudServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
