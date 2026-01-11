@@ -14,6 +14,6 @@ public interface CrudService {
 
     String deleteDataById(int id);
 
-    String update(CrudDto crudDto);
+    String update(int id, CrudDto crudDto);
 
 }

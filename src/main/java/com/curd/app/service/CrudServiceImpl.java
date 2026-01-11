@@ -62,7 +62,7 @@ public class CrudServiceImpl implements CrudService {
 
     //Update data
     @Override
-    public String update(CrudDto crudDto) {
+    public String update(int id, CrudDto crudDto) {
         Crud existing = repository.findById(crudDto.getId())
                 .orElseThrow(() ->
                         new ResourceNotFoundException("No data found with ID: " + crudDto.getId()));
@@ -74,6 +74,7 @@ public class CrudServiceImpl implements CrudService {
         existing.setGender(crudDto.getGender());
         existing.setCity(crudDto.getCity());
 
+        repository.save(existing);
         log.info("Data updated successfully {}", existing);
         return "Data updated successfully";
     }

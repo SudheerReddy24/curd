@@ -95,8 +95,8 @@ class CrudControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(crudDto);
 
-        when(service.update(crudDto)).thenReturn("Data updated successfully");
-        this.mockMvc.perform(put("/update")
+        when(service.update(crudDto.getId(), crudDto)).thenReturn("Data updated successfully");
+        this.mockMvc.perform(put("/update/{id}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
                 .andDo(print()).andExpect(status().isCreated());

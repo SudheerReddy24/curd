@@ -95,7 +95,7 @@ class CrudServiceImplTest {
     void testUpdate() {
         when(repository.save(any(Crud.class))).thenReturn(crud);
 
-        String result = service.update(crudDto);
+        String result = service.update(crudDto.getId(), crudDto);
 
         assertEquals("Data updated successfully", result);
         verify(repository, times(1)).save(any(Crud.class));

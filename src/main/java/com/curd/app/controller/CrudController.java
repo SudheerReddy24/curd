@@ -48,10 +48,10 @@ public class CrudController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @Operation(summary = "Update data by ID",
             description = "Provide a valid ID to update a data")
-    public ResponseEntity<String> updateData(@Valid @RequestBody CrudDto crudDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.update(crudDto));
+    public ResponseEntity<String> updateData(@PathVariable int id, @Valid @RequestBody CrudDto crudDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, crudDto));
     }
 }
