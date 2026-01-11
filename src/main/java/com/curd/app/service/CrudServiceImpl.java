@@ -67,7 +67,6 @@ public class CrudServiceImpl implements CrudService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("No data found with ID: " + crudDto.getId()));
 
-        existing.setId(crudDto.getId());
         existing.setUserName(crudDto.getUserName());
         existing.setPassword(crudDto.getPassword());
         existing.setMobileNumber(crudDto.getMobileNumber());
