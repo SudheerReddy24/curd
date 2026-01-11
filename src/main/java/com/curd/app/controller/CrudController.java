@@ -5,6 +5,8 @@ import com.curd.app.entity.Crud;
 import com.curd.app.service.CrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,40 +17,28 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 @Tag(name = "CRUD", description = "The CRUD API")
+@RequiredArgsConstructor
 public class CrudController {
 
-    @Autowired
-    private CrudService service;
+    private final CrudService service;
 
     @PostMapping("/create")
     @Operation(summary = "Add a new data",
             description = "Provide details to add a new data")
-    public ResponseEntity<String> createData(@RequestBody CrudDto crudDto){
-        try{
-            String cd = service.addData(crudDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(cd);
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    public ResponseEntity<String> createData(@Valid @RequestBody CrudDto crudDto){
+
+        String cd = service.addData(crudDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(cd);
     }
 
     @GetMapping("/getDataById/{id}")
     @Operation(summary = "Get data by ID",
             description = "Provide an valid ID to get the specific data")
-    public ResponseEntity<Crud> getDataById(@PathVariable("id") int id){
-        try{
-            Crud crud = service.getDataById(id);
-            if (crud != null){
-                return ResponseEntity.status(HttpStatus.OK).body(crud);
-            }
-            else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-            }
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    public ResponseEntity<Crud> getDataById(@PathVariable int id){
+
+        Crud crud = service.getDataById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(crud);
     }
 
     @GetMapping("/retrieve")
@@ -79,7 +69,7 @@ public class CrudController {
     @PutMapping("/update")
     @Operation(summary = "Update data by ID",
             description = "Provide a valid ID to update a data")
-    public ResponseEntity<String> updateData(@RequestBody CrudDto crudDto){
+    public ResponseEntity<String> updateData(@Valid @RequestBody CrudDto crudDto){
         try {
             String cd = service.update(crudDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(cd);
