@@ -31,6 +31,7 @@ class CrudServiceImplTest {
     private Crud crud;
     private Crud crudTwo;
     private CrudDto crudDto;
+    private CrudDto crudDtoTwo;
 
     @BeforeEach
     void setUp() {
@@ -42,6 +43,8 @@ class CrudServiceImplTest {
                 9011115678L, "male", "ponnuru");
         crudDto = new CrudDto(1, "sai@gmail.com", "sai1234",
                 9022225678L, "male", "guntur");
+        crudDtoTwo = new CrudDto(2, "bharath@gmail.com", "bharath1234",
+                9011115678L, "male", "ponnuru");
     }
 
     @Test
@@ -58,9 +61,9 @@ class CrudServiceImplTest {
     void testGetDataById() {
         when(repository.findById(1)).thenReturn(Optional.of(crud));
 
-        Crud result = service.getDataById(1);
+        CrudDto result = service.getDataById(1);
 
-        assertEquals(crud, result);
+        assertEquals(crudDto, result);
         verify(repository, times(1)).findById(1);
     }
 
@@ -68,20 +71,20 @@ class CrudServiceImplTest {
     void testGetAllData() {
         when(repository.findAll()).thenReturn(Arrays.asList(crud, crudTwo));
 
-        List<Crud> result = service.getAllData();
+        List<CrudDto> result = service.getAllData();
 
         assertEquals(2, result.size());
-        assertEquals(crud, result.get(0));
-        assertEquals(crudTwo, result.get(1));
+        assertEquals(crudDto, result.get(0));
+        assertEquals(crudDtoTwo, result.get(1));
         verify(repository, times(1)).findAll();
     }
 
     @Test
-    void testDeleteData() {
+    void testDeleteDataById() {
         when(repository.findById(1)).thenReturn(Optional.of(crud));
         doNothing().when(repository).deleteById(1);
 
-        String result = service.deleteData(1);
+        String result = service.deleteDataById(1);
 
         assertEquals("Deleted successfully", result);
         verify(repository, times(1)).findById(1);
@@ -193,13 +196,13 @@ class CrudServiceImplTest {
 //    }
 //
 //    @Test
-//    void deleteData() {
+//    void deleteDataById() {
 //        stubFor(delete(urlEqualTo("/delete/1"))
 //                .willReturn(aResponse()
 //                        .withStatus(200)
 //                        .withHeader("Content-Type", "application/json")
 //                        .withBody("Deleted successfully")));
-//        String result = service.deleteData(1);
+//        String result = service.deleteDataById(1);
 //
 //        assertEquals("Deleted successfully",result);
 //    }

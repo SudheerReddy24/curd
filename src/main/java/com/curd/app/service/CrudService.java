@@ -12,7 +12,7 @@ public interface CrudService {
 
     CrudDto getDataById(int id);
 
-    String deleteData(int id);
+    String deleteDataById(int id);
 
     String update(CrudDto crudDto);
 

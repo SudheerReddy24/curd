@@ -50,7 +50,7 @@ public class CrudServiceImpl implements CrudService {
 
     //Delete data by ID
     @Override
-    public String deleteData(int id) {
+    public String deleteDataById(int id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("No data found with ID: " + id);
         }
