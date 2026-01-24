@@ -1,6 +1,7 @@
 package com.curd.app.service;
 
-import com.curd.app.dto.CrudDto;
+import com.curd.app.dto.CrudRequest;
+import com.curd.app.dto.CrudResponse;
 import com.curd.app.entity.Crud;
 import com.curd.app.exception.ResourceNotFoundException;
 import com.curd.app.repository.CrudRepository;
@@ -19,20 +20,19 @@ public class CrudServiceImpl implements CrudService {
 
     //Add Data
     @Override
-    public String addData(CrudDto crudDto) {
+    public String addData(CrudRequest crudRequest) {
 
-        Crud crud = toEntity(crudDto);
+        Crud crud = toEntity(crudRequest);
 
         repository.save(crud);
 
-        log.info("Data inserted Successfully {}", crudDto);
+        log.info("Data inserted Successfully {}", crudRequest);
         return "Data inserted successfully";
     }
 
     //Get all data
     @Override
-    public List<CrudDto> getAllData() {
-
+    public List<CrudResponse> getAllData() {
         return repository.findAll()
                 .stream()
                 .map(this::toDto)
@@ -41,8 +41,7 @@ public class CrudServiceImpl implements CrudService {
 
     //Get data by id
     @Override
-    public CrudDto getDataById(int id) {
-
+    public CrudResponse getDataById(Integer id) {
         Crud crud = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No data found for ID: " + id));
         return toDto(crud);
@@ -50,28 +49,26 @@ public class CrudServiceImpl implements CrudService {
 
     //Delete data by ID
     @Override
-    public String deleteDataById(int id) {
+    public String deleteDataById(Integer id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("No data found with ID: " + id);
         }
-
         repository.deleteById(id);
-
-        return null;
+        return "Data with ID: " + id + " deleted successfully";
     }
 
     //Update data
     @Override
-    public String update(int id, CrudDto crudDto) {
-        Crud existing = repository.findById(crudDto.getId())
+    public String update(Integer id, CrudRequest crudRequest) {
+        Crud existing = repository.findById(crudRequest.getId())
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("No data found with ID: " + crudDto.getId()));
+                        new ResourceNotFoundException("No data found with ID: " + crudRequest.getId()));
 
-        existing.setUserName(crudDto.getUserName());
-        existing.setPassword(crudDto.getPassword());
-        existing.setMobileNumber(crudDto.getMobileNumber());
-        existing.setGender(crudDto.getGender());
-        existing.setCity(crudDto.getCity());
+        existing.setUserName(crudRequest.getUserName());
+        existing.setPassword(crudRequest.getPassword());
+        existing.setMobileNumber(crudRequest.getMobileNumber());
+        existing.setGender(crudRequest.getGender());
+        existing.setCity(crudRequest.getCity());
 
         repository.save(existing);
         log.info("Data updated successfully {}", existing);
@@ -79,22 +76,22 @@ public class CrudServiceImpl implements CrudService {
     }
 
     //Map Entity to Dto
-    private Crud toEntity(CrudDto crudDto) {
+    private Crud toEntity(CrudRequest crudRequest) {
+        Crud crud = new Crud();
 
-        return new Crud(
-                crudDto.getId(),
-                crudDto.getUserName(),
-                crudDto.getPassword(),
-                crudDto.getMobileNumber(),
-                crudDto.getGender(),
-                crudDto.getCity()
-        );
+        crud.setUserName(crudRequest.getUserName());
+        crud.setPassword(crudRequest.getPassword());
+        crud.setMobileNumber(crudRequest.getMobileNumber());
+        crud.setGender(crudRequest.getGender());
+        crud.setCity(crudRequest.getCity());
+
+        return crud;
     }
 
     //Map Dto to Entity
-    private CrudDto toDto(Crud entity) {
+    private CrudResponse toDto(Crud entity) {
 
-        return new CrudDto(
+        return new CrudResponse(
                 entity.getId(),
                 entity.getUserName(),
                 entity.getPassword(),

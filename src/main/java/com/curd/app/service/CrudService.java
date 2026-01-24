@@ -1,19 +1,20 @@
 package com.curd.app.service;
 
-import com.curd.app.dto.CrudDto;
+import com.curd.app.dto.CrudRequest;
+import com.curd.app.dto.CrudResponse;
 
 import java.util.List;
 
 public interface CrudService {
 
-    String addData(CrudDto crudDto);
+    String addData(CrudRequest crudRequest);
 
-    List<CrudDto> getAllData();
+    List<CrudResponse> getAllData();
 
-    CrudDto getDataById(int id);
+    CrudResponse getDataById(Integer id);
 
-    String deleteDataById(int id);
+    String deleteDataById(Integer id);
 
-    String update(int id, CrudDto crudDto);
+    String update(Integer id, CrudRequest crudRequest);
 
 }

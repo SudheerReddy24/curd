@@ -1,6 +1,7 @@
 package com.curd.app.controller;
 
-import com.curd.app.dto.CrudDto;
+import com.curd.app.dto.CrudRequest;
+import com.curd.app.dto.CrudResponse;
 import com.curd.app.service.CrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,27 +24,27 @@ public class CrudController {
     @PostMapping("/create")
     @Operation(summary = "Add a new data",
             description = "Provide details to add a new data")
-    public ResponseEntity<String> createData(@Valid @RequestBody CrudDto crudDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.addData(crudDto));
+    public ResponseEntity<String> createData(@Valid @RequestBody CrudRequest crudRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.addData(crudRequest));
     }
 
     @GetMapping("/getDataById/{id}")
     @Operation(summary = "Get data by ID",
             description = "Provide an valid ID to get the specific data")
-    public ResponseEntity<CrudDto> getDataById(@PathVariable int id) {
+    public ResponseEntity<CrudResponse> getDataById(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.getDataById(id));
     }
 
     @GetMapping("/retrieve")
     @Operation(summary = "Get all data")
-    public ResponseEntity<List<CrudDto>> retrieveAllData() {
+    public ResponseEntity<List<CrudResponse>> retrieveAllData() {
         return ResponseEntity.status(HttpStatus.OK).body(service.getAllData());
     }
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete data by ID",
             description = "Provide an valid ID to delete the corresponding data")
-    public ResponseEntity<String> deleteData(@PathVariable int id) {
+    public ResponseEntity<String> deleteData(@PathVariable Integer id) {
         service.deleteDataById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
@@ -51,7 +52,7 @@ public class CrudController {
     @PutMapping("/update/{id}")
     @Operation(summary = "Update data by ID",
             description = "Provide a valid ID to update a data")
-    public ResponseEntity<String> updateData(@PathVariable int id, @Valid @RequestBody CrudDto crudDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, crudDto));
+    public ResponseEntity<String> updateData(@PathVariable Integer id, @Valid @RequestBody CrudRequest crudRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, crudRequest));
     }
 }

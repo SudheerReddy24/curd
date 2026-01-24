@@ -1,7 +1,8 @@
 package com.curd.app.service;
 
 import com.curd.app.CrudApplication;
-import com.curd.app.dto.CrudDto;
+import com.curd.app.dto.CrudRequest;
+import com.curd.app.dto.CrudResponse;
 import com.curd.app.entity.Crud;
 import com.curd.app.repository.CrudRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,8 +31,10 @@ class CrudServiceImplTest {
 
     private Crud crud;
     private Crud crudTwo;
-    private CrudDto crudDto;
-    private CrudDto crudDtoTwo;
+    private CrudRequest crudRequest;
+    private CrudRequest crudRequestTwo;
+    private CrudResponse crudResponse;
+    private CrudResponse crudResponseTwo;
 
     @BeforeEach
     void setUp() {
@@ -41,9 +44,13 @@ class CrudServiceImplTest {
                 9022225678L, "male", "guntur");
         crudTwo = new Crud(2, "bharath@gmail.com", "bharath1234",
                 9011115678L, "male", "ponnuru");
-        crudDto = new CrudDto(1, "sai@gmail.com", "sai1234",
+        crudRequest = new CrudRequest(1, "sai@gmail.com", "sai1234",
                 9022225678L, "male", "guntur");
-        crudDtoTwo = new CrudDto(2, "bharath@gmail.com", "bharath1234",
+        crudRequestTwo = new CrudRequest(2, "bharath@gmail.com", "bharath1234",
+                9011115678L, "male", "ponnuru");
+        crudResponse = new CrudResponse(1, "sai@gmail.com", "sai1234",
+                9022225678L, "male", "guntur");
+        crudResponseTwo = new CrudResponse(2, "bharath@gmail.com", "bharath1234",
                 9011115678L, "male", "ponnuru");
     }
 
@@ -51,7 +58,7 @@ class CrudServiceImplTest {
     void testAddData() {
         when(repository.save(any(Crud.class))).thenReturn(crud);
 
-        String result = service.addData(crudDto);
+        String result = service.addData(crudRequest);
 
         assertEquals("Data inserted Successfully", result);
         verify(repository, times(1)).save(any(Crud.class));
@@ -61,9 +68,9 @@ class CrudServiceImplTest {
     void testGetDataById() {
         when(repository.findById(1)).thenReturn(Optional.of(crud));
 
-        CrudDto result = service.getDataById(1);
+        CrudResponse result = service.getDataById(1);
 
-        assertEquals(crudDto, result);
+        assertEquals(crudResponse, result);
         verify(repository, times(1)).findById(1);
     }
 
@@ -71,11 +78,11 @@ class CrudServiceImplTest {
     void testGetAllData() {
         when(repository.findAll()).thenReturn(Arrays.asList(crud, crudTwo));
 
-        List<CrudDto> result = service.getAllData();
+        List<CrudResponse> result = service.getAllData();
 
         assertEquals(2, result.size());
-        assertEquals(crudDto, result.get(0));
-        assertEquals(crudDtoTwo, result.get(1));
+        assertEquals(crudResponse, result.get(0));
+        assertEquals(crudResponseTwo, result.get(1));
         verify(repository, times(1)).findAll();
     }
 
@@ -95,7 +102,7 @@ class CrudServiceImplTest {
     void testUpdate() {
         when(repository.save(any(Crud.class))).thenReturn(crud);
 
-        String result = service.update(crudDto.getId(), crudDto);
+        String result = service.update(crudRequest.getId(), crudRequest);
 
         assertEquals("Data updated successfully", result);
         verify(repository, times(1)).save(any(Crud.class));
@@ -106,7 +113,7 @@ class CrudServiceImplTest {
 //
 //import com.github.tomakehurst.wiremock.WireMockServer;
 //import com.vislesha.curd.CrudApplication;
-//import com.vislesha.curd.dto.CrudDto;
+//import com.vislesha.curd.dto.CrudRequest;
 //import com.vislesha.curd.entity.Crud;
 //import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.BeforeEach;
@@ -127,7 +134,7 @@ class CrudServiceImplTest {
 //    private CrudServiceImpl service;
 //    private Crud crud;
 //    private Crud crudTwo;
-//    private CrudDto crudDto;
+//    private CrudRequest crudRequest;
 //
 //    @BeforeEach
 //    void setUp() {
@@ -135,7 +142,7 @@ class CrudServiceImplTest {
 //                9022225678L, "male", "guntur");
 //        crudTwo = new Crud(2,"bharath@gmail.com","bharath1234",
 //                9011115678L,"male","ponnuru");
-//        crudDto = new CrudDto(1,"sai@gmail.com","sai1234",
+//        crudRequest = new CrudRequest(1,"sai@gmail.com","sai1234",
 //                9022225678L,"male","guntur");
 //        wireMockServer = new WireMockServer(8080);
 //        wireMockServer.start();
@@ -154,7 +161,7 @@ class CrudServiceImplTest {
 //                        .withStatus(201)
 //                        .withHeader("Content-Type", "application/json")
 //                        .withBody("Data inserted Successfully")));
-//        String result = service.addData(crudDto);
+//        String result = service.addData(crudRequest);
 //        assertEquals("Data inserted Successfully",result);
 //
 ////        verify(postRequestedFor(urlEqualTo("/create"))
@@ -214,7 +221,7 @@ class CrudServiceImplTest {
 //                        .withStatus(200)
 //                        .withHeader("Content-Type", "application/json")
 //                        .withBody("Data updated successfully")));
-//        String result = service.update(crudDto);
+//        String result = service.update(crudRequest);
 //
 //        assertEquals("Data updated successfully",result);
 //    }

@@ -1,10 +1,11 @@
 package com.curd.app.controller;
 
+import com.curd.app.dto.CrudResponse;
 import com.curd.app.service.CrudService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.curd.app.dto.CrudDto;
+import com.curd.app.dto.CrudRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,23 +31,20 @@ class CrudControllerTest {
 
     @MockBean
     private CrudService service;
-//    private Crud crudOne;
-//    private Crud crudTwo;
-    private CrudDto crudDto;
-    private CrudDto crudDtoTwo;
-    private List<CrudDto> crudList;
+    private CrudRequest crudRequest;
+    private CrudResponse crudResponse;
+    private CrudResponse crudResponseTwo;
+    private List<CrudResponse> crudList;
 
     @BeforeEach
     void setUp() {
-//        crudOne = new Crud(1,"bharath","bharath123",
-//                9898989898l, "male","ponnuru");
-//        crudTwo = new Crud(2,"akhil","akhil123",
-//                9898981122l, "male","guntur");
-        crudDto = new CrudDto(1,"bharath","bharath123",
-                9898989898l, "male","ponnuru");
-        crudDtoTwo = new CrudDto(2, "akhil", "akhil123",
-                9898981122l, "male", "guntur");
-        crudList = Arrays.asList(crudDto,crudDtoTwo);
+        crudRequest = new CrudRequest(1, "bharath","bharath123",
+                9898989898L, "male","ponnuru");
+        crudResponse = new CrudResponse(1,"bharath","bharath123",
+                9898989898L, "male","ponnuru");
+        crudResponse = new CrudResponse(2, "akhil", "akhil123",
+                9898981122L, "male", "guntur");
+        crudList = Arrays.asList(crudResponse, crudResponseTwo);
     }
 
     @AfterEach
@@ -58,9 +56,9 @@ class CrudControllerTest {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE,false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(crudDto);
+        String requestJson = ow.writeValueAsString(crudResponse);
 
-        when(service.addData(crudDto)).thenReturn("Data inserted Successfully");
+        when(service.addData(crudRequest)).thenReturn("Data inserted Successfully");
         this.mockMvc.perform(post("/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestJson))
@@ -69,7 +67,7 @@ class CrudControllerTest {
 
     @Test
     void testGetDataById() throws Exception {
-        when(service.getDataById(1)).thenReturn(crudDto);
+        when(service.getDataById(1)).thenReturn(crudResponse);
         this.mockMvc.perform(get("/getDataById/1"))
                 .andDo(print()).andExpect(status().isOk());
     }
@@ -93,9 +91,9 @@ class CrudControllerTest {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE,false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(crudDto);
+        String requestJson = ow.writeValueAsString(crudRequest);
 
-        when(service.update(crudDto.getId(), crudDto)).thenReturn("Data updated successfully");
+        when(service.update(1, crudRequest)).thenReturn("Data updated successfully");
         this.mockMvc.perform(put("/update/{id}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
