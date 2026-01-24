@@ -15,7 +15,7 @@ public class CrudResponse {
 
     private String password;
 
-    private Long mobileNumber;
+    private String phoneNumber;
 
     private String gender;
 

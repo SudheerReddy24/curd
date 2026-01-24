@@ -14,10 +14,7 @@ import java.io.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Crud implements Serializable {
-
-	@Serial
-    private static final long serialVersionUID = 1L;
+public class Crud {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +24,7 @@ public class Crud implements Serializable {
 
     private String password;
 
-    private long mobileNumber;
+    private String phoneNumber;
 
     private String gender;
 

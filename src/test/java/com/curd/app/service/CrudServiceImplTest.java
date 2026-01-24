@@ -41,17 +41,17 @@ class CrudServiceImplTest {
         MockitoAnnotations.openMocks(this);
 
         crud = new Crud(1, "sai@gmail.com", "sai1234",
-                9022225678L, "male", "guntur");
+                "9022225678", "male", "guntur");
         crudTwo = new Crud(2, "bharath@gmail.com", "bharath1234",
-                9011115678L, "male", "ponnuru");
+                "9011115678", "male", "ponnuru");
         crudRequest = new CrudRequest(1, "sai@gmail.com", "sai1234",
-                9022225678L, "male", "guntur");
+                "9022225678", "male", "guntur");
         crudRequestTwo = new CrudRequest(2, "bharath@gmail.com", "bharath1234",
-                9011115678L, "male", "ponnuru");
+                "9011115678", "male", "ponnuru");
         crudResponse = new CrudResponse(1, "sai@gmail.com", "sai1234",
-                9022225678L, "male", "guntur");
+                "9022225678", "male", "guntur");
         crudResponseTwo = new CrudResponse(2, "bharath@gmail.com", "bharath1234",
-                9011115678L, "male", "ponnuru");
+                "9011115678", "male", "ponnuru");
     }
 
     @Test

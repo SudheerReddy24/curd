@@ -39,11 +39,11 @@ class CrudControllerTest {
     @BeforeEach
     void setUp() {
         crudRequest = new CrudRequest(1, "bharath","bharath123",
-                9898989898L, "male","ponnuru");
+                "9898989898", "male","ponnuru");
         crudResponse = new CrudResponse(1,"bharath","bharath123",
-                9898989898L, "male","ponnuru");
+                "9898989898", "male","ponnuru");
         crudResponse = new CrudResponse(2, "akhil", "akhil123",
-                9898981122L, "male", "guntur");
+                "9898981122", "male", "guntur");
         crudList = Arrays.asList(crudResponse, crudResponseTwo);
     }
 

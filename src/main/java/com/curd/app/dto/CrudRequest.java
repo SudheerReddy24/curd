@@ -19,9 +19,9 @@ public class CrudRequest {
     @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
     private String password;
 
-    @NotNull(message = "Mobile number is mandatory")
-    @Digits(integer = 10, fraction = 0, message = "Mobile number must be 10 digits")
-    private Long mobileNumber;
+    @NotBlank(message = "Mobile number is mandatory")
+    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+    private String phoneNumber;
 
     @NotBlank(message = "Gender is mandatory")
     @Pattern(

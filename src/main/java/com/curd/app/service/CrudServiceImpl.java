@@ -66,7 +66,7 @@ public class CrudServiceImpl implements CrudService {
 
         existing.setUserName(crudRequest.getUserName());
         existing.setPassword(crudRequest.getPassword());
-        existing.setMobileNumber(crudRequest.getMobileNumber());
+        existing.setPhoneNumber(crudRequest.getPhoneNumber());
         existing.setGender(crudRequest.getGender());
         existing.setCity(crudRequest.getCity());
 
@@ -81,7 +81,7 @@ public class CrudServiceImpl implements CrudService {
 
         crud.setUserName(crudRequest.getUserName());
         crud.setPassword(crudRequest.getPassword());
-        crud.setMobileNumber(crudRequest.getMobileNumber());
+        crud.setPhoneNumber(crudRequest.getPhoneNumber());
         crud.setGender(crudRequest.getGender());
         crud.setCity(crudRequest.getCity());
 
@@ -95,7 +95,7 @@ public class CrudServiceImpl implements CrudService {
                 entity.getId(),
                 entity.getUserName(),
                 entity.getPassword(),
-                entity.getMobileNumber(),
+                entity.getPhoneNumber(),
                 entity.getGender(),
                 entity.getCity()
         );
