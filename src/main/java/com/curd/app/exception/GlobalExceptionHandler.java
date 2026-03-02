@@ -38,6 +38,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
+    //Handle Resource Not Found Exception
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex, HttpServletRequest request){
+
+        ErrorResponse response = new ErrorResponse(
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                request.getRequestURI(),
+                LocalDateTime.now(),
+                null
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
     //Handle Generic Exceptions
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleAllErrors(RuntimeException ex, HttpServletRequest request) {
